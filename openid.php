@@ -24,8 +24,9 @@ class LightOpenID
     , $data
     , $oauth = array()
     , $curl_time_out = 30          // in seconds
-    , $curl_connect_time_out = 30; // in seconds
-    private $identity, $claimed_id;
+    , $curl_connect_time_out = 30 // in seconds
+    , $identity
+    , $claimed_id;
     protected $server, $version, $trustRoot, $aliases, $identifier_select = false
     , $ax = false, $sreg = false, $setup_url = null, $headers = array()
     , $proxy = null, $user_agent = 'LightOpenID'
@@ -51,10 +52,6 @@ class LightOpenID
         $this->returnUrl = $this->trustRoot.$uri;
 
         $this->data = ($_SERVER['REQUEST_METHOD'] === 'POST') ? $_POST : $_GET;
-
-        if (!function_exists('curl_init') && !in_array('https', stream_get_wrappers())) {
-            throw new ErrorException('You must have either https wrappers or curl enabled.');
-        }
     }
 
     function __isset($name)
@@ -108,6 +105,7 @@ class LightOpenID
             case 'mode':
                 return empty($this->data['openid_mode']) ? null : $this->data['openid_mode'];
         }
+
         return null;
     }
 
