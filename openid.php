@@ -26,7 +26,8 @@ class LightOpenID
     , $curl_time_out = 30          // in seconds
     , $curl_connect_time_out = 30 // in seconds
     , $identity
-    , $claimed_id;
+    , $claimed_id
+    , $ax_host;
     protected $server, $version, $trustRoot, $aliases, $identifier_select = false
     , $ax = false, $sreg = false, $setup_url = null, $headers = array()
     , $proxy = null, $user_agent = 'LightOpenID'
@@ -792,7 +793,7 @@ class LightOpenID
                     if (is_int($alias)) {
                         $alias = strtr($field, '/', '_');
                     }
-                    $this->aliases[$alias] = 'http://axschema.org/'.$field;
+                    $this->aliases[$alias] = ($this->ax_host ?? 'http://axschema.org').'/'.$field;
                     if (empty($counts[$alias])) {
                         $counts[$alias] = 0;
                     }
@@ -803,6 +804,7 @@ class LightOpenID
             foreach ($this->aliases as $alias => $ns) {
                 $params['openid.ax.type.'.$alias] = $ns;
             }
+
             foreach ($counts as $alias => $count) {
                 if ($count == 1) {
                     continue;
@@ -989,7 +991,7 @@ class LightOpenID
 
         if ($alias = $this->getNamespaceAlias('http://openid.net/srv/ax/1.0', 'ax')) {
             $prefix = 'openid_'.$alias;
-            $length = strlen('http://axschema.org/');
+            $length = strlen(($this->ax_host ?? 'http://axschema.org').'/');
 
             foreach (explode(',', $this->data['openid_signed']) as $key) {
                 $keyMatch = $alias.'.type.';
