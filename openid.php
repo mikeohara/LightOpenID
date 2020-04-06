@@ -159,18 +159,10 @@ class LightOpenID
 
     protected function set_realm($uri)
     {
-        $realm = '';
+        $protocol = parse_url($uri, PHP_URL_SCHEME) ?? $this->get_realm_protocol(); # Set a protocol, if not specified.
+        $host = parse_url($uri, PHP_URL_HOST);
 
-        # Set a protocol, if not specified.
-        $realm .= (($offset = strpos($uri, '://')) === false) ? $this->get_realm_protocol() : '';
-
-        # Set the offset properly.
-        $offset = (($offset !== false) ? $offset + 3 : 0);
-
-        # Get only the root, without the path.
-        $realm .= (($end = strpos($uri, '/', $offset)) === false) ? $uri : substr($uri, 0, $end);
-
-        $this->trustRoot = $realm;
+        $this->trustRoot = $protocol.'://'.$host;
     }
 
     protected function get_realm_protocol()
@@ -189,7 +181,7 @@ class LightOpenID
             }
         }
 
-        return $use_secure_protocol ? 'https://' : 'http://';
+        return $use_secure_protocol ? 'https' : 'http';
     }
 
     protected function request_curl($url, $method = 'GET', $params = array(), $update_claimed_id)
@@ -225,6 +217,7 @@ class LightOpenID
 
         if ($this->verify_peer !== null) {
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, $this->verify_peer);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, $this->verify_peer);
             if ($this->capath) {
                 curl_setopt($curl, CURLOPT_CAPATH, $this->capath);
             }
@@ -979,9 +972,7 @@ class LightOpenID
             # wants to verify. stripslashes() should solve that problem, but we can't
             # use it when magic_quotes is off.
             $value = $this->data['openid_'.str_replace('.', '_', $item)];
-            $params['openid.'.$item] = function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc() ? stripslashes(
-                $value
-            ) : $value;
+            $params['openid.'.$item] = stripslashes($value);
 
         }
 
