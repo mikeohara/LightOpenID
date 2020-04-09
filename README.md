@@ -1,40 +1,26 @@
-> **NOTICE**
-
-> I am no longer able to support or maintain this project - if you would like to take over the project, please drop me a line.
-
 # LightOpenID
 
-Lightweight PHP5 library for easy OpenID authentication.
+Lightweight PHP library for easy OpenID authentication.
 
-* `Version....:` [**1.3.1** :arrow_double_down:][1]
+* `Version....:` [**1.3.4** :arrow_double_down:][1]
                  ( *see [the change log][2] for details* )
-* `Released on:` March 04, 2016
+* `Released on:` April 09, 2020
 * `Source code:` [Official GitHub Repo :octocat:][3]
-* `Homepage...:` http://code.google.com/p/lightopenid/
-* `Author.....:` [Mewp][4]
+* `Homepage...:` https://github.com/Satariall/LightOpenID
+* `Authors....:` [Mewp][4], [iignatov][5], [Satariall][3]
 
 [1]: https://github.com/iignatov/LightOpenID/archive/master.zip
 [2]: https://github.com/iignatov/LightOpenID/blob/master/CHANGELOG.md
-[3]: https://github.com/Mewp/lightopenid
+[3]: https://github.com/Satariall/LightOpenID
 [4]: https://github.com/Mewp
-
+[5]: https://github.com/iignatov/LightOpenID
 
 ## Quick start
 
 ### Add to composer.json
 
-```javascript
-"repositories": [
-  {
-    "type": "vcs",
-    "url": "https://github.com/iignatov/LightOpenID"
-  }
-],
-
-"require": {	
-  "php": ">=5.4.0",
-  "iignatov/lightopenid": "*"
-}
+```bash
+composer require satariall/lightopenid
 ```
 
 ### Sign-on with OpenID in just 2 steps:
@@ -76,12 +62,12 @@ Lightweight PHP5 library for easy OpenID authentication.
   $openid->getAttributes();
   ```
 
-  For more information see [USAGE.md](http://github.com/iignatov/LightOpenID/blob/master/USAGE.md).
+  For more information see [USAGE.md](https://github.com/Satariall/LightOpenID/blob/master/USAGE.md).
 
 
 ## Requirements
 
-This library requires PHP >= 5.1.2 with cURL or HTTP/HTTPS stream wrappers enabled.
+This library requires PHP >= 7.0 with cURL or HTTP/HTTPS stream wrappers enabled.
 
 
 ## Features
@@ -91,7 +77,7 @@ This library requires PHP >= 5.1.2 with cURL or HTTP/HTTPS stream wrappers enabl
 * Supports both OpenID 1.1 and 2.0.
 * Supports Yadis discovery.
 * Supports only stateless/dumb protocol.
-* Works with PHP >= 5.
+* Works with PHP >= 7.
 * Generates no errors with `error_reporting(E_ALL | E_STRICT)`.
 
 
@@ -107,6 +93,6 @@ This library requires PHP >= 5.1.2 with cURL or HTTP/HTTPS stream wrappers enabl
 
 ## License
 
-[LightOpenID](http://github.com/iignatov/LightOpenID)
+[LightOpenID](https://github.com/Satariall/LightOpenID)
 is an open source software available under the
 [MIT License](http://opensource.org/licenses/mit-license.php).

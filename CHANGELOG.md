@@ -1,5 +1,19 @@
 # LightOpenID Change Log
 
+## v1.3.4 (April 20, 2020)
+`add` Added supporting for custom AX schema domains.
+`add` Tag bump for packagist.org with an auto-update webhook installed.
+`fix` Change README.md, USAGE.md and CHANGELOG.md to the latest updates.
+
+## v1.3.3 (April 6, 2020)
+`fix` Remove deprecated gmp functions.
+`fix` Improve set_realm method to use modern way to build uri.
+`fix` Add `CURLOPT_SSL_VERIFYHOST` option to curl for make verify_peer option workable.
+`fix` Removed deprecated function `get_magic_quotes_gpc` using.
+
+## v1.3.2 (April 3, 2020)
+`fix` Change $identity and $claimed_id variables to public property.
+
 ## v1.3.1 (March 04, 2016)
 
 `fix` Fixed an incorrect function call to get_provider_name().  

@@ -142,3 +142,7 @@
   * contact/email
   * pref/language
 
+If your OAuth2 provider provides custom AX schemas you may set using custom domain:
+```php
+$openid->ax_host = 'http://axschema.openid.example.com';
+```
