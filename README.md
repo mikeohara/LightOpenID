@@ -1,6 +1,6 @@
 # LightOpenID
 
-Lightweight PHP library for easy OpenID authentication.
+Lightweight PHP library for easy OpenID authentication. Forked for Gambit Gaming
 
 * `Version....:` [**1.3.4** :arrow_double_down:][1]
                  ( *see [the change log][2] for details* )
